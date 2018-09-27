@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+seed_tasks = [["Clean home", true], ["Wash a car", true], ["Mow a lawn", false], ["Clean basement", false]]
+
+seed_tasks.each do |task, status|
+  Task.create!(name: task, complete: status)
+end
