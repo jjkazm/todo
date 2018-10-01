@@ -9,6 +9,9 @@ ruby '2.5.1'
 gem 'haml'
 gem 'html2haml'
 
+# Use jquery
+gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
+
 ###
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

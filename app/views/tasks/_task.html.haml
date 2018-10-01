@@ -1,5 +1,5 @@
-= form_for task, remote: true do |f|
-  = f.check_box :complete
-  = f.submit "Update"
-  = f.label :complete, task.name
-  = link_to "remove", task, method: :delete, data: {confirm: "Have you really done it?"}
+- obj.each do |job|
+  = form_for job, remote: true do |f|
+    = f.check_box :complete
+    = f.label :complete, job.name
+    = link_to "destroy", job, remote: true, method: :delete

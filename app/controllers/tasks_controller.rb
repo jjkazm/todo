@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update]
+  skip_before_action :verify_authenticity_token
   def index
     @done = Task.where(complete: true)
     @todo = Task.where(complete: false)
@@ -13,7 +14,7 @@ class TasksController < ApplicationController
     @task = Task.create!(task_params)
     respond_to do |f|
       f.html { redirect_to tasks_path }
-    
+
     end
   end
 
@@ -23,12 +24,18 @@ class TasksController < ApplicationController
 
   def update
     @task.update(task_params)
-    redirect_to tasks_path
+    respond_to do |f|
+      f.html { redirect_to tasks_url }
+      f.js
+    end
   end
 
   def destroy
-    @task.destroy
-    redirect_to tasks_path
+    @task = Task.destroy(params[:id])
+    respond_to do |f|
+      f.html {redirect_to tasks_url}
+      f.js
+    end
   end
 
   private
@@ -41,7 +48,4 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-    def set_article
-    @article = Article.find(params[:id])
-  end
 end
